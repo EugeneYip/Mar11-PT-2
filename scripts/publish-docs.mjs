@@ -12,7 +12,7 @@ if (existsSync(docs)) rmSync(docs, { recursive: true, force: true });
 mkdirSync(docs, { recursive: true });
 cpSync(dist, docs, { recursive: true });
 
-const cname = 'mar11.eugeneyip.net';
+const cname = 'pt.mar11.eugeneyip.net';
 writeFileSync(join(docs, 'CNAME'), cname);
 
 const buildId = process.env.GITHUB_SHA ? process.env.GITHUB_SHA.slice(0, 8) : Date.now().toString();
