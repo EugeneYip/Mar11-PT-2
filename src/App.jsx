@@ -35,11 +35,11 @@ const ISub = ({ children }) => <p style={{fontSize:12,color:"#94a3b8",margin:"0 
 function InteractivePentagon() {
   const [hover, setHover] = useState(null);
   const levels = [
-    { key:"macro",n:1,pentIdx:0,title:"Macro Nacional",sub:"National environment",items:["Macroeconomics","National Resources & Capabilities","Gov't Policies","Institutions","Civil Society"],col:PC.macro },
-    { key:"supra",n:2,pentIdx:4,title:"Meta Supranacional",sub:"Global & international forces",items:["Geopolitics","Global Tech","Global Economics","Social/Env Issues","Multilateral Orgs","Trade Blocs","Foreign Gov'ts","Int'l Financial Flows","Foreign MNCs","Other Groups"],col:PC.supra },
-    { key:"meso",n:3,pentIdx:1,title:"Meso Cluster",sub:"Cluster & value chain ecosystem",items:["Inputs & Suppliers","Demand & Customers","Shared Resources","Shared Activities","Complementarities","Substitutes","Meso Policies","Meso Institutions"],col:PC.meso },
-    { key:"industry",n:4,pentIdx:2,title:"Micro Indústria",sub:"Competitive landscape",items:["Industry Characteristics","Competition","Cooperation","Strategic Groups","Lead Firms","Micro Policies","Micro Institutions"],col:PC.industry },
-    { key:"firm",n:5,pentIdx:3,title:"Firm Empresa",sub:"Internal strategy & execution",col:PC.firm,dual:{left:{heading:"Strategy (SPARK+L)",items:["Scope","Positioning","Activities","Resources","Knowledge","Leadership"]},right:{heading:"Execution",items:["Org & Mgmt","Governance","Firm Policies","Firm Institutions"]}}},
+    { key:"industry",n:4,pentIdx:2,title:"① Micro Indústria",sub:"Competitive landscape — START HERE Comece aqui",items:["Industry Characteristics","Competition","Cooperation","Strategic Groups","Lead Firms","Micro Policies","Micro Institutions"],col:PC.industry },
+    { key:"meso",n:3,pentIdx:1,title:"② Meso Cluster",sub:"Cluster & value chain ecosystem",items:["Inputs & Suppliers","Demand & Customers","Shared Resources","Shared Activities","Complementarities","Substitutes","Meso Policies","Meso Institutions"],col:PC.meso },
+    { key:"macro",n:1,pentIdx:0,title:"③ Macro Nacional",sub:"National environment",items:["Macroeconomics","National Resources & Capabilities","Gov't Policies","Institutions","Civil Society"],col:PC.macro },
+    { key:"supra",n:2,pentIdx:4,title:"④ Meta Supranacional",sub:"Global & international forces",items:["Geopolitics","Global Tech","Global Economics","Social/Env Issues","Multilateral Orgs","Trade Blocs","Foreign Gov'ts","Int'l Financial Flows","Foreign MNCs","Other Groups"],col:PC.supra },
+    { key:"firm",n:5,pentIdx:3,title:"⑤ Firm Empresa",sub:"Internal strategy & execution — END HERE Por último",col:PC.firm,dual:{left:{heading:"Strategy (SPARK+L)",items:["Scope","Positioning","Activities","Resources","Knowledge","Leadership"]},right:{heading:"Execution",items:["Org & Mgmt","Governance","Firm Policies","Firm Institutions"]}}},
   ];
 
   const cx=150,cy=148,r=115;
@@ -51,7 +51,7 @@ function InteractivePentagon() {
 
   return (<div>
     <IH>Drivers of Firm Performance</IH>
-    <ISub>Interativo: passe o mouse/toque nos níveis · Interactive: hover/tap levels</ISub>
+    <ISub>Ordem de análise: Industry → Meso → Macro → Meta → Firm (sequência do professor)</ISub>
     <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 20px rgba(0,0,0,0.06)",marginBottom:14,display:"flex",justifyContent:"center"}}>
       <svg viewBox="0 0 300 296" style={{width:"100%",maxWidth:300,height:"auto"}}>
         <defs><radialGradient id="fpg" cx="50%" cy="48%" r="55%"><stop offset="0%" stopColor="#fff"/><stop offset="100%" stopColor="#f1f5f9"/></radialGradient><filter id="fpds"><feDropShadow dx="0" dy="3" stdDeviation="4" floodOpacity="0.1"/></filter></defs>
@@ -110,6 +110,28 @@ function InteractiveWhatIsIndustry() {
   return (<div style={{marginBottom:16}}>
     <IH>What Constitutes an Industry? O que é uma Indústria?</IH>
     <ISub>Definindo os limites da competição Defining the boundaries of competition</ISub>
+{/* ★ NEW: 3-step useful output methodology */}
+    <div style={{background:"linear-gradient(135deg,#1e40af,#2563eb)",borderRadius:14,padding:"18px 16px",marginBottom:14,color:"#fff",boxShadow:"0 4px 20px rgba(37,99,235,0.2)"}}>
+      <div style={{fontSize:15,fontWeight:800,textAlign:"center",marginBottom:12}}>O Método do "Output Útil" em 3 Passos The "Useful Output" Method</div>
+      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+        {[
+          {n:"1",title:"O que o cliente realmente recebe?",sub:"What useful output does the customer receive?",detail:"Não olhe a tecnologia — apenas a forma e função do produto/serviço que chega ao cliente.",ex:"Smartphone: comunicação móvel + apps + computação portátil"},
+          {n:"2",title:"Quem compete diretamente por esse cliente?",sub:"Who competes directly for that customer?",detail:"Todas as empresas com o mesmo output útil estão na mesma indústria.",ex:"iOS e Android: engenharia diferente, mas mesmo output útil → mesma indústria"},
+          {n:"3",title:"Trace o limite da indústria",sub:"Draw the industry boundary",detail:"Output diferente = indústria diferente. Mesmo que sejam 'tech'.",ex:"Amazon (logística), Microsoft (produtividade), Meta (mídia social) → 3 indústrias"},
+        ].map(step=>(
+          <div key={step.n} style={{background:"rgba(255,255,255,0.12)",borderRadius:10,padding:"12px 14px",borderLeft:"3px solid rgba(255,255,255,0.5)"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
+              <span style={{background:"#fff",color:"#1e40af",width:22,height:22,borderRadius:"50%",display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800,flexShrink:0}}>{step.n}</span>
+              <div><div style={{fontWeight:700,fontSize:14}}>{step.title}</div><div style={{fontSize:11,color:"rgba(255,255,255,0.7)"}}>{step.sub}</div></div>
+            </div>
+            <div style={{fontSize:12,color:"rgba(255,255,255,0.9)",lineHeight:1.6,paddingLeft:30,marginBottom:4}}>{step.detail}</div>
+            <div style={{fontSize:11,color:"#fbbf24",paddingLeft:30,fontStyle:"italic"}}>Ex: {step.ex}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+        {/* Original "includes" section */}
     <div style={{background:"#fff",borderRadius:14,border:"2px solid #2563eb22",padding:"16px 14px",marginBottom:12,boxShadow:"0 2px 12px rgba(37,99,235,0.06)"}}>
       <div style={{display:"flex",alignItems:"center",marginBottom:10}}>
         <div style={{width:26,height:26,borderRadius:8,background:"linear-gradient(135deg,#2563eb,#3b82f6)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:13,fontWeight:700,marginRight:10,flexShrink:0}}>✓</div>
@@ -207,6 +229,66 @@ function InteractiveCompetition() {
   </div>);
 }
 
+
+/* ─── NEW: INTERACTIVE INDUSTRY ECONOMICS ───
+   ★ STRUCTURAL CHANGE #3: Dynamic industry economics analysis
+   Not "what are current margins" but "why is profit structurally possible"
+─── */
+function InteractiveIndustryEconomics() {
+  const [open, setOpen] = useState(null);
+  const questions = [
+    { key:"why", title:"Why is profit POSSIBLE here? Por que o lucro é possível aqui?", color:"#059669", border:"#a7f3d0",
+      items:[
+        "Which departures from perfect competition exist? Quais desvios da competição perfeita?",
+        "Entry barriers: scale, learning, scope, brands, patents, regulation, retaliation Barreiras de entrada?",
+        "Exit barriers: specialized assets, strategic/emotional barriers, exit costs Barreiras de saída?",
+        "Information asymmetries between firms and/or customers Assimetrias de informação?",
+        "Are products differentiable or homogeneous? Diferenciáveis ou homogêneos?",
+      ]},
+    { key:"where", title:"Where does profit COME FROM? De onde vem o lucro?", color:"#2563eb", border:"#bfdbfe",
+      items:[
+        "Price premiums from differentiation (brand, quality, features)? Prêmios por diferenciação?",
+        "Cost advantages from scale, learning, scope, or resource access? Vantagens de custo por escala?",
+        "Customer switching costs or lock-in? Custos de troca?",
+        "Regulatory protection or government policies? Proteção regulatória?",
+        "Network effects or platform dynamics? Efeitos de rede?",
+        "Control of scarce inputs, distribution, or complementary assets? Controle de insumos escassos?",
+      ]},
+    { key:"shift", title:"What SHIFTS would change the profit structure? O que mudaria a estrutura?", color:"#dc2626", border:"#fecaca",
+      items:[
+        "New entrants overcoming barriers (technology change, regulation change)? Novos entrantes superando barreiras?",
+        "Substitutes emerging from adjacent industries? Substitutos adjacentes?",
+        "Buyer or supplier power shifting (consolidation, vertical integration)? Mudança no poder de compradores?",
+        "Competition type migrating on the spectrum (e.g., oligopoly → hypercompetition)? Tipo de competição migrando?",
+        "Macro/Meta forces disrupting the structure (trade policy, technology waves, geopolitics)? Forças macro/meta perturbando?",
+        "Lead firms changing strategy or new lead firms emerging? Empresas líderes mudando?",
+      ]},
+  ];
+
+  return (<div style={{marginBottom:16}}>
+    <IH>Industry Economics Economia da Indústria</IH>
+    <ISub>Não é estática — é como a estrutura de lucro se forma, persiste e muda</ISub>
+    <div style={{background:"#fef2f2",border:"2px solid #dc262622",borderRadius:14,padding:"12px 14px",marginBottom:12}}>
+      <div style={{fontSize:13,fontWeight:700,color:"#991b1b",textAlign:"center",marginBottom:4}}>⚠️ Erro Comum Common Mistake</div>
+      <div style={{display:"flex",gap:8,flexWrap:"wrap",justifyContent:"center"}}>
+        <div style={{background:"#fff",border:"1px solid #fca5a5",borderRadius:8,padding:"6px 12px",fontSize:12}}><span style={{color:"#dc2626",fontWeight:700}}>✗</span> Tratar como 'qual é a margem atual'</div>
+        <div style={{background:"#fff",border:"1px solid #86efac",borderRadius:8,padding:"6px 12px",fontSize:12}}><span style={{color:"#16a34a",fontWeight:700}}>✓</span> Perguntar 'Por que possível? De onde? O que mudaria?'</div>
+      </div>
+    </div>
+    <div style={{display:"flex",flexDirection:"column",gap:8}}>
+      {questions.map(q=>{const on=open===q.key;return(
+        <div key={q.key} onClick={()=>setOpen(on?null:q.key)} style={{background:on?`${q.color}06`:"#fff",border:`1.5px solid ${on?q.color+"44":"#e5e7eb"}`,borderRadius:12,padding:"12px 14px",cursor:"pointer",boxShadow:on?`0 4px 14px ${q.color}10`:"0 1px 3px rgba(0,0,0,0.03)",transition:"all 0.25s ease"}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <span style={{fontSize:14,fontWeight:700,color:on?q.color:"#374151",transition:"color 0.2s",flex:1}}>{q.title}</span>
+            <span style={{fontSize:14,color:"#94a3b8",transform:on?"rotate(180deg)":"rotate(0deg)",transition:"transform 0.25s",display:"inline-block",flexShrink:0,marginLeft:8}}>▾</span>
+          </div>
+          {on && <Expandable items={q.items} color={q.color} border={q.border}/>}
+        </div>
+      );})}
+    </div>
+  </div>);
+}
+
 /* ═══ TAB CONTENT ═══ */
 
 function Overview() {
@@ -285,6 +367,9 @@ function IndustryTab() {
     <InteractiveWhatIsIndustry />
     <InteractiveIndustryDetail />
     <InteractiveCompetition />
+
+    {/* ★ Industry Economics dynamic analysis */}
+    <InteractiveIndustryEconomics />
     <div className="mt-2 mb-3 text-center"><span className="text-xs font-bold text-slate-400 uppercase tracking-widest">▼ Detailed Reference Referência Detalhada ▼</span></div>
     <Card title="Industry Definition — CRITICAL" pt="Definição de indústria — EXTREMAMENTE IMPORTANTE" color="red"><div className="bg-white border-2 border-red-300 rounded-lg p-4 text-center mb-3"><div className="font-bold text-red-700 mb-2">Products/services with SIMILAR FORM AND FUNCTION in DIRECT COMPETITION</div><div className="text-xs text-slate-600">Focus on "useful output" to customers. NOT statistical codes.</div></div><div className="grid grid-cols-2 gap-2 text-xs"><div className="bg-green-50 border border-green-300 rounded p-2">✓ iPhone + Android = same industry (smartphones)</div><div className="bg-red-50 border border-red-300 rounded p-2">✗ Amazon + Microsoft + Meta ≠ same industry (different outputs)</div></div></Card>
     <Card title="Conditions for Perfect Competition" pt="Condições para competição perfeita (desvios = explicam lucro)" color="slate"><div className="grid grid-cols-2 gap-1 text-xs">{["No entry/exit barriers","Homogeneous products","No brands","No scale/scope/learning economies","No preferential relationships","No informational asymmetries","No transportation costs","No collusion"].map(c=>(<div key={c} className="flex items-center gap-1"><span className="text-red-500">✗</span> {c}</div>))}</div><div className="mt-2 text-xs font-semibold text-center">Desvios dessas condições → explicam por que lucros existem</div></Card>
@@ -345,8 +430,8 @@ function EtaSwatch() {
 function CramSheet() {
   return (<div>
     <SectionTitle pt="Resumo rápido e checklist final">Cram Sheet & Final Checklist</SectionTitle>
-    <div className="bg-slate-900 text-white rounded-xl p-5 mb-4"><div className="text-center font-bold text-xl mb-4 text-yellow-300">17 THINGS TO KNOW COLD</div><div className="space-y-2">{[["1","Performance is RELATIVE","Desempenho é RELATIVO","blue"],["2","Comprehensive, integrative, dynamic, question-based","Abrangente, integrativo, dinâmico, baseado em perguntas","blue"],["3","Five levels. At each: positive or negative?","5 níveis. Em cada: positivo ou negativo?","blue"],["4","Levels AND trends","Níveis E tendências","blue"],["5","Industry = similar form + function + direct competition","Indústria = forma+função similar+competição direta","amber"],["6","Full positioning = price AND cost","Posicionamento completo = preço E custo","green"],["7","SPARK: Scope, Positioning, Activities, Resources, Knowledge","","green"],["8","VRIO extends to ARK in SPARK","VRIO se estende ao ARK no SPARK","purple"],["9","Complementors EXPAND; substitutes CONTRACT demand","Complementares expandem; substitutos contraem demanda","cyan"],["10","Ecosystems: where is value generated, appropriated, defended?","Ecossistemas: onde o valor é gerado, apropriado, defendido?","red"],["11","Macro: levels, trends, disruption, non-linearity","Macro: níveis, tendências, disrupção, não-linearidade","blue"],["12","Q2 Home Alone: THE PART → THE KID → THE FRANCHISE","","green"],["13","Q3 ETA: 5yr, CHF 10M, 33% by 2019, more concentrated","","amber"],["14","Barriers to entry/exit allow profit differences to PERSIST","Barreiras fazem diferenças de lucro persistirem","purple"],["15","Competitor Envelope Analysis: what if competitors optimize?","Análise de envelope: e se concorrentes otimizarem?","rose"],["16","General vs. Specific advantages → explains hustle logic","Vantagens gerais vs. específicas","cyan"],["17",`"Wonderful Life" test: remove a player, does it matter?`,"Remova um participante, faz diferença?","purple"]].map(([n,en,pt,c])=>{const colors={blue:"bg-blue-800",green:"bg-green-800",amber:"bg-amber-800",purple:"bg-purple-800",red:"bg-red-800",cyan:"bg-cyan-800",rose:"bg-rose-800"};return(<div key={n} className={`${colors[c]} rounded-lg px-4 py-2 flex items-center gap-3`}><div className="bg-white text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0">{n}</div><div className="flex-1"><span className="font-semibold text-sm">{en}</span>{pt&&<span className="text-xs text-slate-300 ml-2">{pt}</span>}</div></div>);})}</div></div>
-    <Card title="Mistakes That Cost Points" pt="Erros que mais custam pontos" color="red"><div className="grid grid-cols-2 gap-2 text-xs">{["Industry by tech, not useful output","Performance as absolute, not relative","Static analysis, no trends","Levels listed without HOW/WHY mechanism","Meso confused with micro",'"Better resources" without WTP/cost effect',"Positioning from price alone or cost alone","Unsupported case detail not in files"].map(m=>(<div key={m} className="flex items-start gap-1"><span className="text-red-500 flex-shrink-0">✗</span><span>{m}</span></div>))}</div></Card>
+    <div className="bg-slate-900 text-white rounded-xl p-5 mb-4"><div className="text-center font-bold text-xl mb-4 text-yellow-300">17 THINGS TO KNOW COLD</div><div className="space-y-2">{[["1","Performance is RELATIVE","Desempenho é RELATIVO","blue"],["2","Comprehensive, integrative, dynamic, question-based","Abrangente, integrativo, dinâmico, baseado em perguntas","blue"],["3","Five levels: Industry → Meso → Macro → Meta → Firm","Ordem: Indústria→Cluster→Nacional→Supra→Empresa","blue"],["4","Levels AND trends","Níveis E tendências","blue"],["5","Industry = useful output to customer + direct competition","Indústria = output útil + competição direta","amber"],["6","Full positioning = price AND cost","Posicionamento completo = preço E custo","green"],["7","SPARK: Scope, Positioning, Activities, Resources, Knowledge","","green"],["8","VRIO extends to ARK in SPARK","VRIO se estende ao ARK no SPARK","purple"],["9","Complementors EXPAND; substitutes CONTRACT demand","Complementares expandem; substitutos contraem demanda","cyan"],["10","Ecosystems: where is value generated, appropriated, defended?","Ecossistemas: onde o valor é gerado, apropriado, defendido?","red"],["11","Macro: levels, trends, disruption, non-linearity","Macro: níveis, tendências, disrupção, não-linearidade","blue"],["12","Q2 Home Alone: THE PART → THE KID → THE FRANCHISE","","green"],["13","Q3 ETA: 5yr, CHF 10M, 33% by 2019, more concentrated","","amber"],["14","Barriers to entry/exit allow profit differences to PERSIST","Barreiras fazem diferenças de lucro persistirem","purple"],["15","Industry Economics: WHY possible, WHERE from, WHAT shifts it","Economia: por que possível, de onde, o que muda","rose"],["16","General vs. Specific advantages → explains hustle logic","Vantagens gerais vs. específicas","cyan"],["17",`"Wonderful Life" test: remove a player, does it matter?`,"Remova um participante, faz diferença?","purple"]].map(([n,en,pt,c])=>{const colors={blue:"bg-blue-800",green:"bg-green-800",amber:"bg-amber-800",purple:"bg-purple-800",red:"bg-red-800",cyan:"bg-cyan-800",rose:"bg-rose-800"};return(<div key={n} className={`${colors[c]} rounded-lg px-4 py-2 flex items-center gap-3`}><div className="bg-white text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0">{n}</div><div className="flex-1"><span className="font-semibold text-sm">{en}</span>{pt&&<span className="text-xs text-slate-300 ml-2">{pt}</span>}</div></div>);})}</div></div>
+    <Card title="Mistakes That Cost Points" pt="Erros que mais custam pontos" color="red"><div className="grid grid-cols-2 gap-2 text-xs">{["Industry by tech, not useful output","Performance as absolute, not relative","Static analysis, no trends","Levels listed without HOW/WHY mechanism","Meso confused with micro",'"Better resources" without WTP/cost effect',"Positioning from price alone or cost alone","Unsupported case detail not in files","Industry economics as snapshot, not dynamic structure"].map(m=>(<div key={m} className="flex items-start gap-1"><span className="text-red-500 flex-shrink-0">✗</span><span>{m}</span></div>))}</div></Card>
     <Card title="Final 60-Minute Review Plan" pt="Plano de revisão dos 60 minutos finais" color="green"><div className="space-y-3">{[{t:"0–15 min",a:"MEMORIZE Memorize",d:"17 items above. Performance is relative. Five levels + drivers. SPARK. ARK. Price + cost."},{t:"15–30 min",a:"WRITE FROM MEMORY Escreva de memória",d:"Five levels + drivers. Competition spectrum. Home Alone: part/kid/franchise. ETA facts."},{t:"30–45 min",a:"PRACTICE 3 MINI-ANSWERS Pratique 3 respostas",d:"One Five-Level. One VRIO/ARK. One ETA. Each 6–8 sentences."},{t:"45–60 min",a:"CHECK TWO THINGS Verifique duas coisas",d:"Did I explain HOW? Did I explain WHY?"}].map(p=>(<div key={p.t} className="bg-green-50 border border-green-200 rounded-lg p-3"><div className="flex items-center gap-2 mb-1"><Tag color="green">{p.t}</Tag><span className="font-bold text-green-800 text-sm">{p.a}</span></div><div className="text-xs text-slate-700">{p.d}</div></div>))}</div></Card>
     <Card title="Final Checklist" pt="Checklist final" color="amber"><div className="space-y-2 text-xs">{["Identify 3 more cases from Sessions 1–8 for Q1 (biggest gap)","Prepare for unknown Q4 (Five Levels + SPARK on unfamiliar scenario)","Write from memory: five levels + drivers + SPARK + competition types + HA sequence + ETA facts","Practice 3 mini-answers (one per question type)","Every answer: HOW? and WHY?"].map((c,i)=>(<div key={i} className="flex items-start gap-2"><div className="w-4 h-4 border-2 border-amber-400 rounded flex-shrink-0 mt-0.5"></div><span>{c}</span></div>))}</div></Card>
     <div className="bg-slate-100 rounded-lg p-4 text-center"><div className="font-bold text-slate-800 text-sm mb-1">The reflex to bring into the exam room:</div><div className="text-slate-700 text-sm"><strong>Identify the level → Identify the driver → Explain the mechanism → Judge the performance effect</strong></div><div className="text-xs text-slate-500 mt-1">Identifique o nível → Identifique o driver → Explique o mecanismo → Julgue o efeito no desempenho</div></div>
